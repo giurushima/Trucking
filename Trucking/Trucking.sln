@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trucking", "Trucking.csproj", "{BEAF86B9-85D8-4C4F-A9E4-1433AA551ABB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEAF86B9-85D8-4C4F-A9E4-1433AA551ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEAF86B9-85D8-4C4F-A9E4-1433AA551ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEAF86B9-85D8-4C4F-A9E4-1433AA551ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEAF86B9-85D8-4C4F-A9E4-1433AA551ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {072351E3-EF28-4886-A3AC-2E7357D791A0}
+	EndGlobalSection
+EndGlobal
