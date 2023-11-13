@@ -1,6 +1,6 @@
-﻿namespace Trucking.Models
+﻿namespace Trucking.Entities
 {
-    public class TruckerDto
+    public class Trucker
     {
         public int Id { get; set; }
         public string? CompleteName { get; set; } = string.Empty;
