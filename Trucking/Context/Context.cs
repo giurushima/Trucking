@@ -7,6 +7,7 @@ namespace Trucking.Context
     public class Context : DbContext
     {
         public DbSet<Trucker> Truckers { get; set; }
+        public DbSet<Trip> Trips { get; set; }
 
         public Context(DbContextOptions<Context> options) : base(options) //Acá estamos llamando al constructor de DbContext que es el que acepta las opciones
         {
