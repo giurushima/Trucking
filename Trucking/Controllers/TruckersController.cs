@@ -11,31 +11,33 @@ using Trucking.Models.Update;
 
 namespace Trucking.Controllers
 {
-    public class TruckersController : ControllerBase
+    [ApiController]
+    [Route("api/truckers")]
+    public class TruckersController : Controller
     {
-        public TruckersController(Context context)
+        private readonly TruckContext _context;
+        public TruckersController(TruckContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public IEnumerable<Trucker> GetTruckers()
+        public ActionResult<IEnumerable<TruckerDto>> GetTruckers()
         {
-            return _context.Truckers;
+            return Ok(_context.Truckers);
         }
 
         [HttpGet("{id}")]
-        public Trucker GetTrucker(int id)
+        public async Task<IActionResult> GetTrucker(int id)
         {
-            return _context.Truckers.FirstOrDefault(x => x.Id == id);
+            return Ok(_context.Truckers.FirstOrDefault(x => x.Id == id));
         }
 
-        [HttpPost("{id}")]
-        public ActionResult<TruckerDto> CreateTrucker(CreateTruckerDto trucker) {
+        [HttpPost]
+        public async Task<IActionResult> CreateTrucker(CreateTruckerDto trucker) {
 
             var newTrucker = new Trucker
             {
-                Id = trucker.Id,
                 CompleteName = trucker.CompleteName,
                 TruckerType = trucker.TruckerType,
             };

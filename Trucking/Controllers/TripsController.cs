@@ -2,11 +2,9 @@
 
 namespace Trucking.Controllers
 {
-    public class TripsController : ControllerBase
+    [ApiController]
+    [Route("api/[controller]")]
+    public class TripsController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }

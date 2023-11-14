@@ -1,10 +1,13 @@
-﻿using System.Net.NetworkInformation;
-using Trucking.Enums;
+﻿using Trucking.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trucking.Entities
 {
     public class Trip
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Source { get; set; }
         public string? Destiny { get; set; }

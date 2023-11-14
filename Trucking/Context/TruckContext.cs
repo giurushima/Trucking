@@ -4,12 +4,12 @@ using Trucking.Enums;
 
 namespace Trucking.Context
 {
-    public class Context : DbContext
+    public class TruckContext : DbContext
     {
         public DbSet<Trucker> Truckers { get; set; }
         public DbSet<Trip> Trips { get; set; }
 
-        public Context(DbContextOptions<Context> options) : base(options) //Acá estamos llamando al constructor de DbContext que es el que acepta las opciones
+        public TruckContext(DbContextOptions<TruckContext> options) : base(options) //Acá estamos llamando al constructor de DbContext que es el que acepta las opciones
         {
 
         }
@@ -56,7 +56,7 @@ namespace Trucking.Context
                 },
                 new Trip()
                 {
-                    Id = 1,
+                    Id = 2,
                     Source = "Arroyo Seco, Buenos Aires",
                     Destiny = "Bariloche, Rio Negro",
                     Description = "Viaje de ...",
@@ -65,7 +65,7 @@ namespace Trucking.Context
                 },
                 new Trip()
                 {
-                    Id = 1,
+                    Id = 3,
                     Source = "Rosario, Santa Fe",
                     Destiny = "Carlos Paz, Cordoba",
                     Description = "Viaje de ...",

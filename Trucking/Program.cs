@@ -15,10 +15,8 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<Context>(options =>
-{
-    options.UseSqlite(builder.Configuration["ConnectionStrings:TruckingConnectionString"]);
-});
+builder.Services.AddDbContext<TruckContext>(dbContextOptions => dbContextOptions.UseSqlite(
+    builder.Configuration["ConnectionStrings:TruckingConnectionString"]));
 
 var app = builder.Build();
 
