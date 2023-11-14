@@ -53,6 +53,7 @@ namespace Trucking.Context
                     Destiny = "CABA, Buenos Aires",
                     Description = "Viaje de ...",
                     TripStatus = TripStatus.Pending,
+                    TruckerId = truckers[0].Id,
                 },
                 new Trip()
                 {
@@ -61,7 +62,7 @@ namespace Trucking.Context
                     Destiny = "Bariloche, Rio Negro",
                     Description = "Viaje de ...",
                     TripStatus = TripStatus.InProgress,
-
+                    TruckerId = truckers[0].Id,
                 },
                 new Trip()
                 {
@@ -70,6 +71,7 @@ namespace Trucking.Context
                     Destiny = "Carlos Paz, Cordoba",
                     Description = "Viaje de ...",
                     TripStatus = TripStatus.Complete,
+                    TruckerId = truckers[1].Id,
                 }
             };
 

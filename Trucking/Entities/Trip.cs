@@ -13,5 +13,8 @@ namespace Trucking.Entities
         public string? Destiny { get; set; }
         public string? Description { get; set; }
         public TripStatus TripStatus { get; set; }
+        [ForeignKey("TruckerId")]
+        public Trucker? Trucker { get; set; }
+        public int TruckerId { get; set; }
     }
 }

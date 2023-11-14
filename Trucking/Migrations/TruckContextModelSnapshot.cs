@@ -34,7 +34,12 @@ namespace Trucking.Migrations
                     b.Property<int>("TripStatus")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("TruckerId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TruckerId");
 
                     b.ToTable("Trips");
 
@@ -45,7 +50,8 @@ namespace Trucking.Migrations
                             Description = "Viaje de ...",
                             Destiny = "CABA, Buenos Aires",
                             Source = "Rosario, Santa Fe",
-                            TripStatus = 0
+                            TripStatus = 0,
+                            TruckerId = 1
                         },
                         new
                         {
@@ -53,7 +59,8 @@ namespace Trucking.Migrations
                             Description = "Viaje de ...",
                             Destiny = "Bariloche, Rio Negro",
                             Source = "Arroyo Seco, Buenos Aires",
-                            TripStatus = 1
+                            TripStatus = 1,
+                            TruckerId = 1
                         },
                         new
                         {
@@ -61,7 +68,8 @@ namespace Trucking.Migrations
                             Description = "Viaje de ...",
                             Destiny = "Carlos Paz, Cordoba",
                             Source = "Rosario, Santa Fe",
-                            TripStatus = 2
+                            TripStatus = 2,
+                            TruckerId = 2
                         });
                 });
 
@@ -100,6 +108,17 @@ namespace Trucking.Migrations
                             CompleteName = "Agustin Ramirez",
                             TruckerType = "Ganaderia"
                         });
+                });
+
+            modelBuilder.Entity("Trucking.Entities.Trip", b =>
+                {
+                    b.HasOne("Trucking.Entities.Trucker", "Trucker")
+                        .WithMany()
+                        .HasForeignKey("TruckerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Trucker");
                 });
 #pragma warning restore 612, 618
         }
