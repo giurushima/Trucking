@@ -1,6 +1,6 @@
 ﻿using Trucking.Enums;
 
-namespace Trucking.Models
+namespace Trucking.Models.General
 {
     public class TripDto
     {

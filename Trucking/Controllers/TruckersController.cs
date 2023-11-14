@@ -44,9 +44,6 @@ namespace Trucking.Controllers
 
             return Ok(newTrucker);
         }
-        public int Id { get; set; }
-        public string? CompleteName { get; set; } = string.Empty;
-        public string? TruckerType { get; set; }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTrucker(int id, UpdateTruckerDto trucker)

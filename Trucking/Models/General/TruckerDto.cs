@@ -1,4 +1,4 @@
-﻿namespace Trucking.Models
+﻿namespace Trucking.Models.General
 {
     public class TruckerDto
     {
