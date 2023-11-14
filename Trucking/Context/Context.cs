@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Trucking.Entities;
+using Trucking.Enums;
 
 namespace Trucking.Context
 {
@@ -40,7 +41,41 @@ namespace Trucking.Context
                 }
             };
             modelBuilder.Entity<Trucker>().HasData(truckers);
+
+            var trips = new Trip[3]
+            {
+
+                new Trip()
+                {
+                    Id = 1,
+                    Source = "Rosario, Santa Fe",
+                    Destiny = "CABA, Buenos Aires",
+                    Description = "Viaje de ...",
+                    TripStatus = TripStatus.Pending,
+                },
+                new Trip()
+                {
+                    Id = 1,
+                    Source = "Arroyo Seco, Buenos Aires",
+                    Destiny = "Bariloche, Rio Negro",
+                    Description = "Viaje de ...",
+                    TripStatus = TripStatus.InProgress,
+
+                },
+                new Trip()
+                {
+                    Id = 1,
+                    Source = "Rosario, Santa Fe",
+                    Destiny = "Carlos Paz, Cordoba",
+                    Description = "Viaje de ...",
+                    TripStatus = TripStatus.Complete,
+                }
+            };
+
+            modelBuilder.Entity<Trip>().HasData(trips);
+
             base.OnModelCreating(modelBuilder);
         }
     }
 }
+
