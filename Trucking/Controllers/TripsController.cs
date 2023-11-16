@@ -53,6 +53,24 @@ namespace Trucking.Controllers
 
             return Ok(newTrip);
         }
+        [HttpPut("{idTrip}")]
+        public ActionResult UpdateTrip(int idTrucker, int idTrip, UpdateTripDto trip)
+        {
+            var updateTrip = _context.Trips.Where(x => x.TruckerId == idTrucker && x.Id == idTrip).FirstOrDefault();
+            
+            if (updateTrip != null)
+            {
+                updateTrip.Source = trip.Source;
+                updateTrip.Destiny = trip.Destiny;
+                updateTrip.Description = trip.Description;
+                updateTrip.TripStatus = trip.TripStatus;
+                updateTrip.TruckerId = trip.TruckerId;
+
+                _context.SaveChanges();
+            }
+            return Ok(updateTrip);
+        }
+
         [HttpDelete("{idTrip}")]
         public ActionResult<IEnumerable<TripDto>> DeleteTrip(int idTrucker,int idTrip)
         {
