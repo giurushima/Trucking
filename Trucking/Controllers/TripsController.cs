@@ -8,6 +8,7 @@ using Trucking.Models.General;
 using Trucking.Enums;
 using Trucking.Models.Create;
 using Trucking.Models.Update;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Trucking.Controllers
 {
@@ -22,15 +23,46 @@ namespace Trucking.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TripDto>> GetTrips(int idTrucker) 
+        public ActionResult<IEnumerable<TripDto>> GetTrips(int idTrucker)
         {
             return Ok(_context.Trips.Where(x => x.TruckerId == idTrucker).ToList());
         }
 
         [HttpGet("{idTrip}", Name = "GetTrip")]
-        public ActionResult<IEnumerable<TripDto>> GetTrip(int idTrucker, int idTrip) 
+        public ActionResult<IEnumerable<TripDto>> GetTrip(int idTrucker, int idTrip)
         {
             return Ok(_context.Trips.Where(x => x.TruckerId == idTrucker && x.Id == idTrip).FirstOrDefault());
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateTrip(int idTrucker, CreateTripDto trip)
+        {
+
+            _context.Truckers.FirstOrDefault(x => x.Id == idTrucker);
+
+            var newTrip = new Trip
+            {
+                Id = trip.Id,
+                Source = trip.Source,
+                Destiny = trip.Destiny,
+                Description = trip.Description,
+                TripStatus = trip.TripStatus,
+                TruckerId = trip.TruckerId,
+            };
+            _context.Trips.Add(newTrip);
+            _context.SaveChanges();
+
+            return Ok(newTrip);
+        }
+        [HttpDelete("{idTrip}")]
+        public ActionResult<IEnumerable<TripDto>> DeleteTrip(int idTrucker,int idTrip)
+        {
+            var deleteid = _context.Trips.Where(x => x.TruckerId == idTrucker && x.Id == idTrip).FirstOrDefault();
+
+            _context.Trips.Remove(deleteid);
+
+            _context.SaveChanges();
+
+            return Ok(deleteid);
         }
     }
 }
