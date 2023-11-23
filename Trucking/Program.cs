@@ -3,6 +3,11 @@ using Microsoft.OpenApi.Models;
 using Trucking.Context;
 using System.Text;
 using System.Text.Json.Serialization;
+using AutoMapper;
+using Trucking.Services;
+using Trucking.Services.Trips;
+using Trucking.Services.Truckers;
+using Trucking.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +22,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TruckContext>(dbContextOptions => dbContextOptions.UseSqlite(
     builder.Configuration["ConnectionStrings:TruckingConnectionString"]));
+
+builder.Services.AddScoped<IInfoTripsRepository, InfoTripsRepository>();
+builder.Services.AddScoped<IInfoTruckersRepository, InfoTruckersRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

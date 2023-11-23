@@ -2,7 +2,7 @@
 using Trucking.Models.Create;
 using Trucking.Models.Update;
 
-namespace Trucking.Services
+namespace Trucking.Services.Truckers
 {
     public interface IInfoTruckersRepository
     {

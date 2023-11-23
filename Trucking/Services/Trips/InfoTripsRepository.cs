@@ -1,4 +1,4 @@
-﻿namespace Trucking.Services
+﻿namespace Trucking.Services.Trips
 {
     public class InfoTripsRepository
     {
