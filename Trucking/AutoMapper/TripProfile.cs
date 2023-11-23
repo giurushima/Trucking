@@ -11,9 +11,9 @@ namespace Trucking.AutoMapper
     {
         public TripProfile()
         {
-            CreateMap<Entities.Trip, Models.TripDto>();
-            CreateMap<Models.CreateTripDto, Entities.Trip>();
-            CreateMap<Models.UpdateTripDto, Entities.Trip>();
+            CreateMap<Entities.Trip, Models.General.TripDto>();
+            CreateMap<Models.Create.CreateTripDto, Entities.Trip>();
+            CreateMap<Models.Update.UpdateTripDto, Entities.Trip>();
         }
     }
 }
