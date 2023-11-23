@@ -8,7 +8,7 @@ namespace Trucking.Services.Trips
     {
         public IEnumerable<Trip> GetTrips(int idTrucker);
         public Trip? GetTrip(int idTrucker, int idTrip);
-        public void CreateTrip(int idTrucker, CreateTripDto trip);
+        public void CreateTrip(CreateTripDto trip);
         public void UpdateTrip(int idTrucker, int idTrip, UpdateTripDto trip);
         public void DeleteTrip(int idTrucker, int idTrip);
         public void SaveChanges();

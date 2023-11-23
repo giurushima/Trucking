@@ -8,6 +8,8 @@ using Trucking.Models.General;
 using Trucking.Enums;
 using Trucking.Models.Create;
 using Trucking.Models.Update;
+using AutoMapper;
+using Trucking.Services.Truckers;
 
 namespace Trucking.Controllers
 {
@@ -15,69 +17,83 @@ namespace Trucking.Controllers
     [Route("api/truckers")]
     public class TruckersController : Controller
     {
-        private readonly TruckContext _context;
-        public TruckersController(TruckContext context)
+        private readonly IInfoTruckersRepository _infoTruckersRepository;
+        private readonly IMapper _mapper;
+
+        public TruckersController(IInfoTruckersRepository IInfoTruckersRepository, IMapper mapper)
         {
-            _context = context;
+            _infoTruckersRepository = IInfoTruckersRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TruckerDto>> GetTruckers()
+        public JsonResult GetTruckers()
         {
-            return Ok(_context.Truckers);
+            var truckers = _infoTruckersRepository.GetTruckers();
+
+            return new JsonResult(_mapper.Map<ICollection<TruckerDto>>(truckers));
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetTrucker(int id)
+        public ActionResult GetTrucker(int id)
         {
-            return Ok(_context.Truckers.FirstOrDefault(x => x.Id == id));
+            Entities.Trucker? trucker = _infoTruckersRepository.GetTrucker(id);
+            if (trucker is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<TruckerDto>(trucker));
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateTrucker(CreateTruckerDto trucker) {
+        [HttpPost(Name = "GetTruckers")]
+        public ActionResult<TruckerDto> CreateTrucker(CreateTruckerDto truckerDto) {
 
-            var newTrucker = new Trucker
-            {
-                CompleteName = trucker.CompleteName,
-                TruckerType = trucker.TruckerType,
-            };
-            _context.Truckers.Add(newTrucker);
-            _context.SaveChanges();
+            var trucker = _mapper.Map<Trucker>(truckerDto);
 
-            return Ok(newTrucker);
+            _infoTruckersRepository.CreateTrucker(truckerDto);
+
+            return CreatedAtRoute(
+                "GetTruckers",
+                new
+                {
+                    Id = trucker.Id,
+                },
+                _mapper.Map<TruckerDto>(trucker));
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateTrucker(int id, UpdateTruckerDto trucker)
+        public ActionResult UpdateTrucker(int id, UpdateTruckerDto trucker)
         {
-            var updatetrucker = _context.Truckers.FirstOrDefault(x => x.Id == id);
-
-            updatetrucker.CompleteName = trucker.CompleteName;
-            updatetrucker.TruckerType = trucker.TruckerType;
-
-            _context.SaveChanges();
-
-            var updatetruckerDto = new TruckerDto
+            var existingTrucker = _infoTruckersRepository.GetTrucker(id);
+            if (existingTrucker == null) 
             {
-                Id = updatetrucker.Id,
-                CompleteName = updatetrucker.CompleteName,
-                TruckerType = updatetrucker.TruckerType,
-            };
+                return NotFound();
+            }
 
-            return Ok(updatetruckerDto);
+            _infoTruckersRepository.UpdateTrucker(id, trucker);
 
+            _mapper.Map(trucker, existingTrucker);
+
+            _infoTruckersRepository.SaveChanges();
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrucker(int id)
+        public ActionResult DeleteTrucker(int id)
         {
-            var deleteid = _context.Truckers.FirstOrDefault(x => x.Id == id);
+            var truckerdelete = _infoTruckersRepository.GetTrucker(id);
+            if (truckerdelete == null) 
+            {
+                return NotFound();
+            }
 
-            _context.Truckers.Remove(deleteid);
+            _infoTruckersRepository.DeleteTrucker(id);
 
-            await _context.SaveChangesAsync();
+            _infoTruckersRepository.SaveChanges();
 
-            return Ok(deleteid);
+            return NoContent();
         }
     }
 }

@@ -9,6 +9,8 @@ using Trucking.Enums;
 using Trucking.Models.Create;
 using Trucking.Models.Update;
 using System.ComponentModel.DataAnnotations.Schema;
+using AutoMapper;
+using Trucking.Services.Trips;
 
 namespace Trucking.Controllers
 {
@@ -16,71 +18,83 @@ namespace Trucking.Controllers
     [Route("api/truckers/{idTrucker}/trips")]
     public class TripsController : Controller
     {
-        private readonly TruckContext _context;
-        public TripsController(TruckContext context)
+        private readonly IInfoTripsRepository _infoTripsRepository;
+        private readonly IMapper _mapper;
+
+        public TripsController(IInfoTripsRepository IInfoTripsRepository, IMapper mapper)
         {
-            _context = context;
+            _infoTripsRepository = IInfoTripsRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<TripDto>> GetTrips(int idTrucker)
+        public JsonResult GetTrips(int idTrucker)
         {
-            return Ok(_context.Trips.Where(x => x.TruckerId == idTrucker).ToList());
+            var trips = _infoTripsRepository.GetTrips(idTrucker);
+
+            return new JsonResult(_mapper.Map<ICollection<TripDto>>(trips));
         }
 
         [HttpGet("{idTrip}", Name = "GetTrip")]
-        public ActionResult<IEnumerable<TripDto>> GetTrip(int idTrucker, int idTrip)
+        public ActionResult GetTrip(int idTrucker, int idTrip)
         {
-            return Ok(_context.Trips.Where(x => x.TruckerId == idTrucker && x.Id == idTrip).FirstOrDefault());
-        }
-        [HttpPost]
-        public async Task<IActionResult> CreateTrip(int idTrucker, CreateTripDto trip)
-        {
-
-            _context.Truckers.FirstOrDefault(x => x.Id == idTrucker);
-
-            var newTrip = new Trip
+            Entities.Trip? trip = _infoTripsRepository.GetTrip(idTrucker, idTrip);
+            if (trip is null)
             {
-                Id = trip.Id,
-                Source = trip.Source,
-                Destiny = trip.Destiny,
-                Description = trip.Description,
-                TripStatus = trip.TripStatus,
-                TruckerId = trip.TruckerId,
-            };
-            _context.Trips.Add(newTrip);
-            _context.SaveChanges();
+                return NotFound();
+            }
 
-            return Ok(newTrip);
+            return Ok(_mapper.Map<TripDto>(trip));
         }
+
+        [HttpPost(Name = "GetTrips")]
+        public ActionResult<TripDto> CreateTrip(CreateTripDto tripDto)
+        {
+            var trip = _mapper.Map<Trip>(tripDto);
+
+            _infoTripsRepository.CreateTrip(tripDto);
+
+            return CreatedAtRoute(
+                "GetTrips",
+                new
+                {
+                    Id = trip.Id
+                },
+                _mapper.Map<TripDto>(trip));
+        }
+
         [HttpPut("{idTrip}")]
         public ActionResult UpdateTrip(int idTrucker, int idTrip, UpdateTripDto trip)
         {
-            var updateTrip = _context.Trips.Where(x => x.TruckerId == idTrucker && x.Id == idTrip).FirstOrDefault();
-            
-            if (updateTrip != null)
+            var existingTrip = _infoTripsRepository.GetTrip(idTrucker, idTrip);
+            if (existingTrip == null) 
             {
-                updateTrip.Source = trip.Source;
-                updateTrip.Destiny = trip.Destiny;
-                updateTrip.Description = trip.Description;
-                updateTrip.TripStatus = trip.TripStatus;
-                updateTrip.TruckerId = trip.TruckerId;
-
-                _context.SaveChanges();
+                return NotFound();
             }
-            return Ok(updateTrip);
+
+            _infoTripsRepository.UpdateTrip(idTrucker, idTrip, trip);
+
+            _mapper.Map(trip, existingTrip);
+
+            _infoTripsRepository.SaveChanges();
+
+            return NoContent();
         }
 
         [HttpDelete("{idTrip}")]
-        public ActionResult<IEnumerable<TripDto>> DeleteTrip(int idTrucker,int idTrip)
+        public ActionResult DeleteTrip(int idTrucker,int idTrip)
         {
-            var deleteid = _context.Trips.Where(x => x.TruckerId == idTrucker && x.Id == idTrip).FirstOrDefault();
+            var tripdelete = _infoTripsRepository.GetTrip(idTrucker, idTrip);
+            if (tripdelete == null)
+            {
+                return NotFound();
+            }
 
-            _context.Trips.Remove(deleteid);
+            _infoTripsRepository.DeleteTrip(idTrucker, idTrip);
 
-            _context.SaveChanges();
+            _infoTripsRepository.SaveChanges();
 
-            return Ok(deleteid);
+            return NoContent();
         }
     }
 }
