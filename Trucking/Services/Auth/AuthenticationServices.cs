@@ -1,5 +1,6 @@
 ﻿using Trucking.Entities;
 using Trucking.Services.Users;
+using Trucking.Models.Auth;
 
 namespace Trucking.Services.Auth
 {
