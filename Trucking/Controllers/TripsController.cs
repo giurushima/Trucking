@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Trucking;
-using System.ComponentModel.DataAnnotations;
-using Trucking.Context;
 using Microsoft.EntityFrameworkCore;
 using Trucking.Entities;
 using Trucking.Models.General;
@@ -48,11 +45,11 @@ namespace Trucking.Controllers
         }
 
         [HttpPost(Name = "GetTrips")]
-        public ActionResult<TripDto> CreateTrip(CreateTripDto tripDto)
+        public ActionResult<TripDto> CreateTrip(int idTrucker, CreateTripDto tripDto)
         {
             var trip = _mapper.Map<Trip>(tripDto);
 
-            _infoTripsRepository.CreateTrip(tripDto);
+            _infoTripsRepository.CreateTrip(idTrucker, tripDto);
 
             return CreatedAtRoute(
                 "GetTrips",

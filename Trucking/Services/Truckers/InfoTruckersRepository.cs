@@ -34,7 +34,7 @@ namespace Trucking.Services.Truckers
                 TruckerType = trucker.TruckerType,
             };
             _context.Truckers.Add(newTrucker);
-            _context.SaveChanges();
+            SaveChanges();
         }
         public void UpdateTrucker(int id, UpdateTruckerDto trucker)
         {

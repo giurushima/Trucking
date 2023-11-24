@@ -7,7 +7,6 @@ using AutoMapper;
 using Trucking.Services;
 using Trucking.Services.Trips;
 using Trucking.Services.Truckers;
-using Trucking.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

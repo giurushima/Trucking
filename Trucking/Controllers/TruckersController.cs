@@ -67,9 +67,7 @@ namespace Trucking.Controllers
         {
             var existingTrucker = _infoTruckersRepository.GetTrucker(id);
             if (existingTrucker == null) 
-            {
                 return NotFound();
-            }
 
             _infoTruckersRepository.UpdateTrucker(id, trucker);
 

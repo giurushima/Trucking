@@ -10,8 +10,8 @@ using Trucking.Context;
 namespace Trucking.Migrations
 {
     [DbContext(typeof(TruckContext))]
-    [Migration("20231114213442_initdbcontext")]
-    partial class initdbcontext
+    [Migration("20231123232324_inittruckingdb")]
+    partial class inittruckingdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

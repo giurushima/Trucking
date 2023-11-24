@@ -5,13 +5,12 @@ using Trucking.Models;
 using Trucking.Entities;
 using AutoMapper;
 
-namespace Trucking.AutoMapper
+namespace Trucking.AutoMapperProfiles
 {
     public class TripProfile : Profile
     {
-        public TripProfile()
-        {
-            CreateMap<Entities.Trip, Models.General.TripDto>();
+        public TripProfile() { 
+            CreateMap<Entities.Trip, TripDto>();
             CreateMap<Models.Create.CreateTripDto, Entities.Trip>();
             CreateMap<Models.Update.UpdateTripDto, Entities.Trip>();
         }
