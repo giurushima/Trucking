@@ -7,6 +7,8 @@ using AutoMapper;
 using Trucking.Services;
 using Trucking.Services.Trips;
 using Trucking.Services.Truckers;
+using Trucking.Services.Users;
+using Trucking.Services.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,8 @@ builder.Services.AddDbContext<TruckContext>(dbContextOptions => dbContextOptions
 
 builder.Services.AddScoped<IInfoTripsRepository, InfoTripsRepository>();
 builder.Services.AddScoped<IInfoTruckersRepository, InfoTruckersRepository>();
+builder.Services.AddScoped<IAuthenticationServices, AuthenticationServices>();
+builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
