@@ -8,6 +8,7 @@ namespace Trucking.Context
     {
         public DbSet<Trucker> Truckers { get; set; }
         public DbSet<Trip> Trips { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public TruckContext(DbContextOptions<TruckContext> options) : base(options) //Acá estamos llamando al constructor de DbContext que es el que acepta las opciones
         {
@@ -74,8 +75,34 @@ namespace Trucking.Context
                     TruckerId = truckers[1].Id,
                 }
             };
-
             modelBuilder.Entity<Trip>().HasData(trips);
+
+            var users = new User[3]
+            {
+                new User()
+                {
+                    Id = 7,
+                    Name = "Gabriel",
+                    UserName = "gabriel",
+                    Password = "1234",
+                },
+                new User()
+                {
+                    Id = 7,
+                    Name = "Fernando",
+                    UserName = "fernando",
+                    Password = "1234",
+                },
+                new User()
+                {
+                    Id = 7,
+                    Name = "Sara",
+                    UserName = "sara",
+                    Password = "1234",
+                }
+            };
+
+            modelBuilder.Entity<User>().HasData(users);
 
             base.OnModelCreating(modelBuilder);
         }
