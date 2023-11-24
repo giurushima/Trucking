@@ -10,8 +10,8 @@ using Trucking.Context;
 namespace Trucking.Migrations
 {
     [DbContext(typeof(TruckContext))]
-    [Migration("20231123232324_inittruckingdb")]
-    partial class inittruckingdb
+    [Migration("20231124022734_initialdbtruck")]
+    partial class initialdbtruck
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,6 +109,52 @@ namespace Trucking.Migrations
                             Id = 3,
                             CompleteName = "Agustin Ramirez",
                             TruckerType = "Ganaderia"
+                        });
+                });
+
+            modelBuilder.Entity("Trucking.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(32)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Gabriel",
+                            Password = "1234",
+                            UserName = "gabriel"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Fernando",
+                            Password = "1234",
+                            UserName = "fernando"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Sara",
+                            Password = "1234",
+                            UserName = "sara"
                         });
                 });
 

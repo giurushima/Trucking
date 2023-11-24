@@ -81,21 +81,21 @@ namespace Trucking.Context
             {
                 new User()
                 {
-                    Id = 7,
+                    Id = 1,
                     Name = "Gabriel",
                     UserName = "gabriel",
                     Password = "1234",
                 },
                 new User()
                 {
-                    Id = 7,
+                    Id = 2,
                     Name = "Fernando",
                     UserName = "fernando",
                     Password = "1234",
                 },
                 new User()
                 {
-                    Id = 7,
+                    Id = 3,
                     Name = "Sara",
                     UserName = "sara",
                     Password = "1234",

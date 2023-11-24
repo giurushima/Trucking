@@ -6,7 +6,6 @@ namespace Trucking.Entities
     public class User
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [MaxLength(32)]
         public string? Name { get; set; }

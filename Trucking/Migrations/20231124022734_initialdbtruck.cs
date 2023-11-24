@@ -4,7 +4,7 @@
 
 namespace Trucking.Migrations
 {
-    public partial class inittruckingdb : Migration
+    public partial class initialdbtruck : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,21 @@ namespace Trucking.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Truckers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 32, nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", nullable: false),
+                    Password = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,6 +76,21 @@ namespace Trucking.Migrations
                 values: new object[] { 3, "Agustin Ramirez", "Ganaderia" });
 
             migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Name", "Password", "UserName" },
+                values: new object[] { 1, "Gabriel", "1234", "gabriel" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Name", "Password", "UserName" },
+                values: new object[] { 2, "Fernando", "1234", "fernando" });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Name", "Password", "UserName" },
+                values: new object[] { 3, "Sara", "1234", "sara" });
+
+            migrationBuilder.InsertData(
                 table: "Trips",
                 columns: new[] { "Id", "Description", "Destiny", "Source", "TripStatus", "TruckerId" },
                 values: new object[] { 1, "Viaje de ...", "CABA, Buenos Aires", "Rosario, Santa Fe", 0, 1 });
@@ -85,6 +115,9 @@ namespace Trucking.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Trips");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Truckers");

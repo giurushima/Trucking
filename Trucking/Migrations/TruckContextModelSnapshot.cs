@@ -110,6 +110,52 @@ namespace Trucking.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Trucking.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(32)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Gabriel",
+                            Password = "1234",
+                            UserName = "gabriel"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Fernando",
+                            Password = "1234",
+                            UserName = "fernando"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Sara",
+                            Password = "1234",
+                            UserName = "sara"
+                        });
+                });
+
             modelBuilder.Entity("Trucking.Entities.Trip", b =>
                 {
                     b.HasOne("Trucking.Entities.Trucker", "Trucker")
