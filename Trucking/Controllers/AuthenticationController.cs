@@ -6,6 +6,7 @@ using Trucking.Models.Auth;
 using Trucking.Services.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Trucking.Controllers
 {
@@ -38,7 +39,7 @@ namespace Trucking.Controllers
 
 
             var claimsForToken = new List<Claim>();
-            claimsForToken.Add(new Claim("sub", user.ID.ToString()));
+            claimsForToken.Add(new Claim("sub", user.Id.ToString()));
             claimsForToken.Add(new Claim("given_name", user.Name));
 
             var jwtSecurityToken = new JwtSecurityToken(
