@@ -4,6 +4,7 @@ using Trucking.Entities;
 using Trucking.Models.Create;
 using Trucking.Models.Update;
 using Trucking.Models.General;
+using Microsoft.EntityFrameworkCore;
 
 namespace Trucking.Services.Truckers
 {
@@ -21,9 +22,13 @@ namespace Trucking.Services.Truckers
             return _context.Truckers;
         }
 
-        public Trucker GetTrucker(int id)
+        public Trucker? GetTrucker(int idTrucker, bool includeTrips)
         {
-            return _context.Truckers.FirstOrDefault(t => t.Id == id);
+            if (includeTrips)
+                return _context.Truckers.Include(c => c.Trips)
+                    .Where(c => c.Id == idTrucker).FirstOrDefault();
+
+            return _context.Truckers.Where(c => c.Id == idTrucker).FirstOrDefault();
         }
 
         public void CreateTrucker(CreateTruckerDto trucker)

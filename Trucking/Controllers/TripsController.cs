@@ -8,11 +8,13 @@ using Trucking.Models.Update;
 using System.ComponentModel.DataAnnotations.Schema;
 using AutoMapper;
 using Trucking.Services.Trips;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Trucking.Controllers
 {
     [ApiController]
     [Route("api/truckers/{idTrucker}/trips")]
+    [Authorize]
     public class TripsController : Controller
     {
         private readonly IInfoTripsRepository _infoTripsRepository;
@@ -47,17 +49,22 @@ namespace Trucking.Controllers
         [HttpPost(Name = "GetTrips")]
         public ActionResult<TripDto> CreateTrip(int idTrucker, CreateTripDto tripDto)
         {
-            var trip = _mapper.Map<Trip>(tripDto);
 
-            _infoTripsRepository.CreateTrip(idTrucker, tripDto);
+            var newTrip = _mapper.Map<Entities.Trip>(tripDto);
 
-            return CreatedAtRoute(
-                "GetTrips",
-                new
+            _infoTripsRepository.CreateTrip(idTrucker, newTrip);
+            _infoTripsRepository.SaveChanges();
+
+            var tripToReturn = _mapper.Map<TripDto>(newTrip);
+
+            return CreatedAtRoute(//CreatedAtRoute es para q devuelva 201, el 200 de post.
+                "GetTrip", //El primer parámetro es el Name del endpoint que hace el Get
+                new //El segundo los parametros q necesita ese endpoint
                 {
-                    Id = trip.Id
+                    idTrucker,
+                    idTrip = tripToReturn.Id
                 },
-                _mapper.Map<TripDto>(trip));
+                tripToReturn);//El tercero es el objeto creado. 
         }
 
         [HttpPut("{idTrip}")]

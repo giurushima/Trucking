@@ -2,7 +2,7 @@
 {
     public class UpdateTruckerDto
     {
-        public string? CompleteName { get; set; } = string.Empty;
+        public string? CompleteName { get; set; } 
         public string? TruckerType { get; set; }
     }
 }

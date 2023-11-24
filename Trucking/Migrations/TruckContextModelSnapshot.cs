@@ -159,12 +159,17 @@ namespace Trucking.Migrations
             modelBuilder.Entity("Trucking.Entities.Trip", b =>
                 {
                     b.HasOne("Trucking.Entities.Trucker", "Trucker")
-                        .WithMany()
+                        .WithMany("Trips")
                         .HasForeignKey("TruckerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Trucker");
+                });
+
+            modelBuilder.Entity("Trucking.Entities.Trucker", b =>
+                {
+                    b.Navigation("Trips");
                 });
 #pragma warning restore 612, 618
         }

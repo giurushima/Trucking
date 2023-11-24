@@ -10,11 +10,13 @@ using Trucking.Models.Create;
 using Trucking.Models.Update;
 using AutoMapper;
 using Trucking.Services.Truckers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Trucking.Controllers
 {
     [ApiController]
     [Route("api/truckers")]
+    [Authorize]
     public class TruckersController : Controller
     {
         private readonly IInfoTruckersRepository _infoTruckersRepository;
@@ -35,15 +37,16 @@ namespace Trucking.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetTrucker(int id)
+        public ActionResult GetTrucker(int id, bool includeTrips = false)
         {
-            Entities.Trucker? trucker = _infoTruckersRepository.GetTrucker(id);
-            if (trucker is null)
-            {
+            var trucker = _infoTruckersRepository.GetTrucker(id, includeTrips);
+            if (trucker == null)
                 return NotFound();
-            }
 
-            return Ok(_mapper.Map<TruckerDto>(trucker));
+            if (includeTrips)
+                return Ok(_mapper.Map<TruckerDto>(trucker));
+
+            return Ok(_mapper.Map<TruckerWithoutTripsDto>(trucker));
         }
 
         [HttpPost(Name = "GetTruckers")]
@@ -65,7 +68,7 @@ namespace Trucking.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateTrucker(int id, UpdateTruckerDto trucker)
         {
-            var existingTrucker = _infoTruckersRepository.GetTrucker(id);
+            var existingTrucker = _infoTruckersRepository.GetTrucker(id, false);
             if (existingTrucker == null) 
                 return NotFound();
 
@@ -81,7 +84,7 @@ namespace Trucking.Controllers
         [HttpDelete("{id}")]
         public ActionResult DeleteTrucker(int id)
         {
-            var truckerdelete = _infoTruckersRepository.GetTrucker(id);
+            var truckerdelete = _infoTruckersRepository.GetTrucker(id, false);
             if (truckerdelete == null) 
             {
                 return NotFound();

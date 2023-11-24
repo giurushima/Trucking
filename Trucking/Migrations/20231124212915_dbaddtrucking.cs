@@ -4,7 +4,7 @@
 
 namespace Trucking.Migrations
 {
-    public partial class initialdbtruck : Migration
+    public partial class dbaddtrucking : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

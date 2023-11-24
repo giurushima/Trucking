@@ -11,7 +11,8 @@ namespace Trucking.AutoMapperProfiles
         public TruckerProfile() {
             CreateMap<Entities.Trucker, Models.General.TruckerDto>();
             CreateMap<Models.Create.CreateTruckerDto, Entities.Trucker>();
-            CreateMap<Models.Update.UpdateTripDto, Entities.Trucker>();
+            CreateMap<Models.Update.UpdateTruckerDto, Entities.Trucker>();
+            CreateMap<Entities.Trucker, Models.General.TruckerWithoutTripsDto>();
         }
     }
 }

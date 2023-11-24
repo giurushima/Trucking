@@ -27,21 +27,12 @@ namespace Trucking.Services.Trips
             return _context.Trips.Where(x => x.TruckerId == idTrucker && x.Id == idTrip).FirstOrDefault();
         }
 
-        public void CreateTrip(int idTrucker, CreateTripDto trip)
+        public void CreateTrip(int idTrucker, Trip trip)
         {
-            _context.Truckers.FirstOrDefault(x => x.Id == idTrucker);
+            var trucker =_context.Truckers.FirstOrDefault(x => x.Id == idTrucker);
 
-            var newTrip = new Trip
-            {
-                Id = trip.Id,
-                Source = trip.Source,
-                Destiny = trip.Destiny,
-                Description = trip.Description,
-                TripStatus = trip.TripStatus,
-                TruckerId = trip.TruckerId,
-            };
-            _context.Trips.Add(newTrip);
-            SaveChanges();
+            if (trucker != null)
+                trucker.Trips.Add(trip);
         }
         public void UpdateTrip(int idTrucker, int idTrip, UpdateTripDto trip)
         {
@@ -53,7 +44,6 @@ namespace Trucking.Services.Trips
                 updateTrip.Destiny = trip.Destiny;
                 updateTrip.Description = trip.Description;
                 updateTrip.TripStatus = trip.TripStatus;
-                updateTrip.TruckerId = trip.TruckerId;
 
                 _context.SaveChanges();
             }
