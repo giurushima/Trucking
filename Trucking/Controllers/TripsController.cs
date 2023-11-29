@@ -57,14 +57,14 @@ namespace Trucking.Controllers
 
             var tripToReturn = _mapper.Map<TripDto>(newTrip);
 
-            return CreatedAtRoute(//CreatedAtRoute es para q devuelva 201, el 200 de post.
-                "GetTrip", //El primer parámetro es el Name del endpoint que hace el Get
-                new //El segundo los parametros q necesita ese endpoint
+            return CreatedAtRoute(
+                "GetTrip", 
+                new 
                 {
                     idTrucker,
                     idTrip = tripToReturn.Id
                 },
-                tripToReturn);//El tercero es el objeto creado. 
+                tripToReturn);
         }
 
         [HttpPut("{idTrip}")]
