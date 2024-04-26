@@ -7,6 +7,7 @@ using Trucking.Services.Auth;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Trucking.Enums;
 
 namespace Trucking.Controllers
 {
@@ -41,6 +42,7 @@ namespace Trucking.Controllers
             var claimsForToken = new List<Claim>();
             claimsForToken.Add(new Claim("sub", user.Id.ToString()));
             claimsForToken.Add(new Claim("given_name", user.Name));
+            claimsForToken.Add(new Claim("rol", user.Roles.ToString()));
 
             var jwtSecurityToken = new JwtSecurityToken(
               _config["Authentication:Issuer"],

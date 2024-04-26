@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Trucking.Enums;
 
 namespace Trucking.Models.Update
 {
@@ -10,5 +11,6 @@ namespace Trucking.Models.Update
         [Required(ErrorMessage = "Ingrese tipo de carga (menor a 32 caracteres)")]
         [MaxLength(32)]
         public string? TruckerType { get; set; }
+        public Roles Roles { get; set; }
     }
 }

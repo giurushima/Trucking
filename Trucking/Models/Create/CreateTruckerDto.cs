@@ -11,5 +11,6 @@ namespace Trucking.Models.Create
         [Required(ErrorMessage = "Ingrese tipo de carga (menor a 32 caracteres)")]
         [MaxLength(32)]
         public string? TruckerType { get; set; }
+        public Roles Roles { get; set; }
     }
 }
