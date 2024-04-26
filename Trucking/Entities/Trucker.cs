@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Trucking.Enums;
 
 namespace Trucking.Entities
 {
@@ -14,6 +15,7 @@ namespace Trucking.Entities
         [Required(ErrorMessage = "Ingrese tipo de carga (menor a 32 caracteres)")]
         [MaxLength(32)]
         public string? TruckerType { get; set; }
-        public ICollection<Trip> Trips { get; set; } = new List<Trip>(); //Lo seteamos a una nueva colección para evitar que retorne un null en algún momento de la ejecución.
+        public ICollection<Trip> Trips { get; set; } = new List<Trip>();
+        public Roles Roles { get; set; }
     }
 }

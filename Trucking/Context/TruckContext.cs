@@ -12,7 +12,7 @@ namespace Trucking.Context
 
         public TruckContext(DbContextOptions<TruckContext> options) : base(options) //Acá estamos llamando al constructor de DbContext que es el que acepta las opciones
         {
-
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,20 +26,21 @@ namespace Trucking.Context
                     Id = 1,
                     CompleteName = "Juan Gomez",
                     TruckerType = "Carga Seca",
+                    Roles = Roles.Trucker,
                 },
                 new Trucker()
                 {
                     Id = 2,
                     CompleteName = "Martin Suarez",
                     TruckerType = "Autos",
-
+                    Roles = Roles.Trucker,
                 },
                 new Trucker()
                 {
                     Id = 3,
                     CompleteName = "Agustin Ramirez",
                     TruckerType = "Ganaderia",
-
+                    Roles = Roles.Trucker,
                 }
             };
             modelBuilder.Entity<Trucker>().HasData(truckers);
@@ -85,6 +86,7 @@ namespace Trucking.Context
                     Name = "Gabriel",
                     UserName = "gabriel",
                     Password = "1234",
+                    Roles = Roles.Admin,
                 },
                 new User()
                 {
@@ -92,6 +94,7 @@ namespace Trucking.Context
                     Name = "Fernando",
                     UserName = "fernando",
                     Password = "1234",
+                    Roles = Roles.Supervisor,
                 },
                 new User()
                 {
@@ -99,6 +102,7 @@ namespace Trucking.Context
                     Name = "Sara",
                     UserName = "sara",
                     Password = "1234",
+                    Roles = Roles.Employeer,
                 }
             };
 

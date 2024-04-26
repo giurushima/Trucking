@@ -1,6 +1,10 @@
 ﻿namespace Trucking.Enums
 {
-    public class Roles
+    public enum Roles
     {
+        Admin,
+        Supervisor,
+        Employeer,
+        Trucker
     }
 }

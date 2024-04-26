@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Trucking.Enums;
 
 namespace Trucking.Entities
 {
@@ -16,5 +17,7 @@ namespace Trucking.Entities
         [Required(ErrorMessage = "Ingrese contraseña (mayor a 4 caracteres)")]
         [MinLength(4)]
         public string? Password { get; set; }
+        [Required(ErrorMessage = "Ingrese rol (solo por enumeracion)")]
+        public Roles Roles { get; set; }
     }
 }
