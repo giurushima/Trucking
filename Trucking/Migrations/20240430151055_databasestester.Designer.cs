@@ -10,8 +10,8 @@ using Trucking.Context;
 namespace Trucking.Migrations
 {
     [DbContext(typeof(TruckContext))]
-    [Migration("20240426151721_truckingdb")]
-    partial class truckingdb
+    [Migration("20240430151055_databasestester")]
+    partial class databasestester
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

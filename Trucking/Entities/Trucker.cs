@@ -16,6 +16,7 @@ namespace Trucking.Entities
         [MaxLength(32)]
         public string? TruckerType { get; set; }
         public ICollection<Trip> Trips { get; set; } = new List<Trip>();
+        [Required]
         public Roles Roles { get; set; }
     }
 }

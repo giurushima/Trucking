@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Trucking.Enums;
 
 namespace Trucking.Models.Auth
 {

@@ -28,6 +28,7 @@ namespace Trucking.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Roles = "Admin, Supervisor")]
         [HttpGet]
         public JsonResult GetTruckers()
         {
@@ -81,6 +82,7 @@ namespace Trucking.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public ActionResult DeleteTrucker(int id)
         {

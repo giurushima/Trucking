@@ -17,7 +17,7 @@ namespace Trucking.Entities
         [Required(ErrorMessage = "Ingrese contraseña (mayor a 4 caracteres)")]
         [MinLength(4)]
         public string? Password { get; set; }
-        [Required(ErrorMessage = "Ingrese rol (solo por enumeracion)")]
+        [Required(ErrorMessage = "Ingrese rol")]
         public Roles Roles { get; set; }
     }
 }

@@ -42,15 +42,22 @@ namespace Trucking.Controllers
             var claimsForToken = new List<Claim>();
             claimsForToken.Add(new Claim("sub", user.Id.ToString()));
             claimsForToken.Add(new Claim("given_name", user.Name));
-            claimsForToken.Add(new Claim("rol", user.Roles.ToString()));
+            foreach (Roles role in Enum.GetValues(typeof(Roles)))
+            {
+                if (user.Roles == role) // Verificar si el usuario tiene este rol
+                {
+                    claimsForToken.Add(new Claim("rol", role.ToString()));
+                }
+            }
+
 
             var jwtSecurityToken = new JwtSecurityToken(
-              _config["Authentication:Issuer"],
-              _config["Authentication:Audience"],
-              claimsForToken,
-              DateTime.UtcNow,
-              DateTime.UtcNow.AddHours(1),
-              credentials);
+            _config["Authentication:Issuer"],
+            _config["Authentication:Audience"],
+            claimsForToken,
+            DateTime.UtcNow,
+            DateTime.UtcNow.AddHours(1),
+            credentials);
 
             var tokenToReturn = new JwtSecurityTokenHandler()
                 .WriteToken(jwtSecurityToken);
