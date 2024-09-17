@@ -10,6 +10,7 @@ using Trucking.Services.Truckers;
 using Trucking.Services.Users;
 using Trucking.Services.Auth;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +62,12 @@ builder.Services.AddAuthentication("Bearer") //"Bearer" es el tipo de auntentica
         };
     }
 );
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ElevatedRights", policy =>
+          policy.RequireRole("Admin", "Supervisor", "Employeer", "Trucker"));
+});
 
 builder.Services.AddScoped<IInfoTripsRepository, InfoTripsRepository>();
 builder.Services.AddScoped<IInfoTruckersRepository, InfoTruckersRepository>();

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Trucking.Enums;
 
+
 namespace Trucking.Controllers
 {
     [Route("api/authentication")]
@@ -38,18 +39,11 @@ namespace Trucking.Controllers
 
             var credentials = new SigningCredentials(securityPassword, SecurityAlgorithms.HmacSha256);
 
-
             var claimsForToken = new List<Claim>();
-            claimsForToken.Add(new Claim("sub", user.Id.ToString()));
-            claimsForToken.Add(new Claim("given_name", user.Name));
-            foreach (Roles role in Enum.GetValues(typeof(Roles)))
-            {
-                if (user.Roles == role) // Verificar si el usuario tiene este rol
-                {
-                    claimsForToken.Add(new Claim("rol", role.ToString()));
-                }
-            }
-
+            claimsForToken.Add(new Claim("id", user.Id.ToString()));
+            claimsForToken.Add(new Claim("name", user.Name));
+            claimsForToken.Add(new Claim("username", user.UserName));
+            claimsForToken.Add(new Claim("role", user.Roles.ToString()));
 
             var jwtSecurityToken = new JwtSecurityToken(
             _config["Authentication:Issuer"],
