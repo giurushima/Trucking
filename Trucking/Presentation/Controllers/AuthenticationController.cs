@@ -43,7 +43,7 @@ namespace Trucking.Controllers
             claimsForToken.Add(new Claim("id", user.Id.ToString()));
             claimsForToken.Add(new Claim("name", user.Name));
             claimsForToken.Add(new Claim("username", user.UserName));
-            claimsForToken.Add(new Claim("role", user.Roles.ToString()));
+            claimsForToken.Add(new Claim(ClaimTypes.Role, user.Roles.ToString()));
 
             var jwtSecurityToken = new JwtSecurityToken(
             _config["Authentication:Issuer"],
