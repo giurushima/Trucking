@@ -37,6 +37,7 @@ namespace Trucking.Controllers
             return new JsonResult(_mapper.Map<ICollection<TruckerDto>>(truckers));
         }
 
+        [Authorize(Roles = "Supervisor")]
         [HttpGet("{id}")]
         public ActionResult GetTrucker(int id, bool includeTrips = false)
         {
