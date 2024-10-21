@@ -11,6 +11,7 @@ using Trucking.Services.Users;
 using Trucking.Services.Auth;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Trucking.Application.Services.UsersDb;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,6 +73,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddScoped<IInfoTripsRepository, InfoTripsRepository>();
 builder.Services.AddScoped<IInfoTruckersRepository, InfoTruckersRepository>();
 builder.Services.AddScoped<IAuthenticationServices, AuthenticationServices>();
+builder.Services.AddScoped<IInfoUsersRepository, InfoUsersRepository>();
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
