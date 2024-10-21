@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Trucking.Application.Models.General;
+using Trucking.Application.Services.UsersDb;
 using Trucking.Models.General;
 using Trucking.Services.Users;
 
