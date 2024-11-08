@@ -29,5 +29,17 @@ namespace Trucking.Presentation.Controllers
 
             return new JsonResult(_mapper.Map<ICollection<UserDto>>(users));
         }
+
+        [HttpGet("{idTrip}")]
+        public ActionResult GetUser(int idUser)
+        {
+            Entities.User? user = _infoUsersRepository.GetUser(idUser);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<UserDto>(user));
+        }
     } 
 }
