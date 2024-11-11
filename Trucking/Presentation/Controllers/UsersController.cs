@@ -41,5 +41,17 @@ namespace Trucking.Presentation.Controllers
 
             return Ok(_mapper.Map<UserDto>(user));
         }
+            var userToDelete = _infoUsersRepository.GetUser(id);
+            if (userToDelete == null)
+            {
+                return NotFound();
+            }
+
+            _infoUsersRepository.DeleteUser(id);
+
+            _infoUsersRepository.SaveChanges();
+
+            return NoContent();
+        }
     } 
 }
