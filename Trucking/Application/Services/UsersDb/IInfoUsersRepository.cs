@@ -11,6 +11,7 @@ namespace Trucking.Application.Services.UsersDb
         public User? GetUser(int idUser);
         public void CreateUser(CreateUserDto user);
         public void UpdateUser(int id, UpdateUserDto user);
+        public void DeleteUser(int id);
         public void SaveChanges();
     }
 }
