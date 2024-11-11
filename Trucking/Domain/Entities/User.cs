@@ -7,6 +7,7 @@ namespace Trucking.Entities
     public class User
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required(ErrorMessage = "Ingrese nombre (menor a 32 caracteres)")]
         [MaxLength(32)]
