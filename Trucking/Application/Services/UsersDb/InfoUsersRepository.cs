@@ -32,6 +32,7 @@ namespace Trucking.Application.Services.UsersDb
                 Name = user.Name,
                 UserName = user.UserName,
                 Password = user.Password,
+                Roles = user.Roles,
             };
             _context.Users.Add(newUser);
             SaveChanges();
@@ -46,8 +47,20 @@ namespace Trucking.Application.Services.UsersDb
                 existingUser.Name = user.Name;
                 existingUser.UserName = user.UserName;
                 existingUser.Password = user.Password;
+                existingUser.Roles = user.Roles;
 
                 SaveChanges();
+            }
+        }
+
+        public void DeleteUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(x => x.Id == id);
+
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
             }
         }
 
