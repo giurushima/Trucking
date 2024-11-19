@@ -25,3 +25,9 @@ Proyecto sobre desarrollo en asignatura de Programacion III para entrega final d
 2. Descargar e instalar [GIT](https://git-scm.com/) y configurar con cuenta de [GitHub](https://github.com/).
 3. Clonar repositorio de [Trucking](https://github.com/giurushima/Trucking.git).
 4. EN CONSTRUCCION.
+
+| Metodo | Ruta | Descripcion |
+|-----------------|----------------|----------------|
+| Valor 1,1      | Valor 1,2      | Valor 1,3      |
+| Valor 2,1      | Valor 2,2      | Valor 2,3      |
+| Valor 3,1      | Valor 3,2      | Valor 3,3      |
