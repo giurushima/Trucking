@@ -26,8 +26,38 @@ Proyecto sobre desarrollo en asignatura de Programacion III para entrega final d
 3. Clonar repositorio de [Trucking](https://github.com/giurushima/Trucking.git).
 4. EN CONSTRUCCION.
 
+Authentication
+
 | Metodo | Ruta | Descripcion |
 |-----------------|----------------|----------------|
-| Valor 1,1      | Valor 1,2      | Valor 1,3      |
-| Valor 2,1      | Valor 2,2      | Valor 2,3      |
-| Valor 3,1      | Valor 3,2      | Valor 3,3      |
+| POST | /api/authentication/authenticate | Autenticar a usuario por nombre de usuario y contraseña |
+
+Trips
+
+| Metodo | Ruta | Descripcion |
+|-----------------|----------------|----------------|
+| GET | /api/trips/{idTrucker}/trips | Devuelve los viajes de un chofer a traves de un ID |
+| POST | /api/trips/{idTrucker}/trips | Crea un viaje para un chofer a traves de un ID |
+| GET | /api/trips/{idTrucker}/trips/{idTrip} | Devuelve un viaje segun ID de chofer y ID de viaje |
+| PUT | /api/trips/{idTrucker}/trips/{idTrip} | Actualiza un viaje segun ID de chofer y ID de viaje |
+| DELETE | /api/trips/{idTrucker}/trips/{idTrip} | Borra un viaje segun ID de chofer y ID de viaje |
+
+Truckers
+
+| Metodo | Ruta | Descripcion |
+|-----------------|----------------|----------------|
+| GET | /api/truckers | Devuelve todos los choferes |
+| POST | /api/truckers | Crea un nuevo chofer |
+| GET | /api/truckers/{id} | Devuelve un chofer segun ID |
+| PUT | /api/truckers/{id} | Actualiza/modifica un chofer segun ID |
+| DELETE | /api/truckers/{id} | Borra un chofer segun ID |
+
+Users
+
+| Metodo | Ruta | Descripcion |
+|-----------------|----------------|----------------|
+| GET | /api/users | Devuelve todos los usuarios creados |
+| POST | /api/users | Crea un nuevo usuario en el sistema |
+| GET | /api/users/{id} | Devuelve un usuario segun ID |
+| PUT | /api/users/{id} | Actualiza/modifica un usuario segun ID |
+| DELETE | /api/users/{id} | Borra un usuario segun ID |
